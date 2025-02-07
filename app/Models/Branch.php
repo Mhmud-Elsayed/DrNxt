@@ -20,12 +20,12 @@ public function users()
 public function patients()
 {
     return $this->hasManyThrough(
-        Patient::class,  // Target model
-        Clinic::class,   // Intermediate model
-        'id',            // Foreign key on clinics table (Primary key of Clinic)
-        'clinic_id',     // Foreign key on patients table linking to clinics
-        'clinic_id',     // Foreign key on branches table linking to clinics
-        'id'             // Primary key of Clinic
+        Patient::class,
+        Clinic::class,
+        'id',
+        'clinic_id',
+        'clinic_id',
+        'id',
     );
 }
 }

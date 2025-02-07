@@ -26,12 +26,12 @@ class Patient extends Model
     public function branch()
     {
         return $this->hasManyThrough(
-            Branch::class,  // Target model
-            Clinic::class,  // Intermediate model
-            'id',           // Foreign key on the clinics table (primary key of Clinic)
-            'clinic_id',    // Foreign key on the branches table linking to clinics
-            'clinic_id',    // Foreign key on the patients table linking to clinics
-            'id'            // Primary key of Clinic
+            Branch::class,
+            Clinic::class,
+            'id',
+            'clinic_id',
+            'clinic_id',
+            'id',
         );
     }
 

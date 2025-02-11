@@ -30,9 +30,6 @@ class ClinicPanelProvider extends PanelProvider
             ->login()
             ->profile(EditProfile::class)
             ->passwordReset()
-            ->colors([
-                'primary' => Color::Amber,
-            ])
             ->tenant(Branch::class)
             ->discoverResources(in: app_path('Filament/Clinic/Resources'), for: 'App\\Filament\\Clinic\\Resources')
             ->discoverPages(in: app_path('Filament/Clinic/Pages'), for: 'App\\Filament\\Clinic\\Pages')

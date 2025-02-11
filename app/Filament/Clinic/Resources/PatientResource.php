@@ -10,6 +10,10 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Filament\Forms\Components\Repeater;
+use Filament\Forms\Components\Select;
+use App\Models\Allergy;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -24,8 +28,11 @@ class PatientResource extends Resource
         return $form
             ->schema([
                 Forms\Components\TextInput::make('clinic_id')
-                    ->required()
-                    ->numeric(),
+                ->default(fn () => Auth::user()?->clinic_id) // Automatically set clinic_id from auth user
+                ->disabled()
+                ->required()
+                ->hidden()
+                ->numeric(),
                 Forms\Components\TextInput::make('first_name')
                     ->required()
                     ->maxLength(255),
@@ -41,6 +48,16 @@ class PatientResource extends Resource
                 Forms\Components\DatePicker::make('dob'),
                 Forms\Components\Textarea::make('address')
                     ->columnSpanFull(),
+                    Repeater::make('patientAllergies')
+                    ->relationship('patientAllergies')
+                    ->schema([
+                        Select::make('allergy_id')
+                            ->label('Allergy')
+                            ->options(Allergy::pluck('name', 'id'))
+                            ->searchable(),
+                    ])
+                    ->columns(1)
+                    ->defaultItems(0)
             ]);
     }
 

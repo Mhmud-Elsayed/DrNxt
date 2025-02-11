@@ -2,8 +2,11 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Patient extends Model
 {
@@ -33,10 +36,13 @@ class Patient extends Model
             'clinic_id',
             'id',
         );
-    }
-    public function allergies()
+    }public function allergies()
     {
-        return $this->belongsToMany(Allergy::class);
+        return $this->belongsToMany(Allergy::class, 'allergy_patient')->withTimestamps();
     }
 
+    public function patientAllergies(): HasMany
+    {
+        return $this->hasMany(AllergyPatient::class);
+    }
 }

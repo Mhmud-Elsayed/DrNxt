@@ -16,7 +16,8 @@ class Allergy extends Model
         'ar_description',
     ];
     public function patients()
-{
-    return $this->belongsToMany(Patient::class);
-}
+    {
+        return $this->belongsToMany(Patient::class, 'allergy_patient')->withTimestamps();
+    }
+
 }

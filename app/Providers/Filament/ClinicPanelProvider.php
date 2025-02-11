@@ -8,6 +8,7 @@ use Filament\Http\Middleware\AuthenticateSession;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
 use Filament\Pages;
+use Filament\Pages\Auth\EditProfile;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
@@ -26,6 +27,9 @@ class ClinicPanelProvider extends PanelProvider
         return $panel
             ->id('clinic')
             ->path('clinic')
+            ->login()
+            ->profile(EditProfile::class)
+            ->passwordReset()
             ->colors([
                 'primary' => Color::Amber,
             ])

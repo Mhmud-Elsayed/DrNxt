@@ -34,5 +34,9 @@ class Patient extends Model
             'id',
         );
     }
+    public function allergies()
+    {
+        return $this->belongsToMany(Allergy::class);
+    }
 
 }

@@ -16,13 +16,11 @@ return new class extends Migration
             $table->foreignId('speciality_id')->onDelete('cascade');
             $table->foreignId("user_id")->onDelete('cascade');
             $table->string('ar_name');
-            $table->string('en_name');
+            $table->string('name');
             $table->string('phone');
             $table->string('image')->nullable();
             $table->string('address')->nullable();
             $table->boolean('is_active')->default(true);
-
-
             $table->timestamps();
         });
     }

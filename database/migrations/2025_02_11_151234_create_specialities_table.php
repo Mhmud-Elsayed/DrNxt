@@ -14,8 +14,9 @@ return new class extends Migration
         Schema::create('specialities', function (Blueprint $table) {
             $table->id();
             $table->string('ar_name')->unique();
-            $table->string('en_name')->unique();
+            $table->string('name')->unique();
             $table->text("descreption")->nullable();
+            $table->text("ar_descreption")->nullable();
             $table->boolean("is_active")->default(false);
             $table->timestamps();
         });

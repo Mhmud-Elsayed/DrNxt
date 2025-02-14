@@ -28,6 +28,7 @@ class ClinicPanelProvider extends PanelProvider
             ->id('clinic')
             ->path('clinic')
             ->login()
+            ->unsavedChangesAlerts()
             ->profile(EditProfile::class)
             ->passwordReset()
             ->tenant(Branch::class)

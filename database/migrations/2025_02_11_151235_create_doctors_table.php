@@ -15,7 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('speciality_id')->onDelete('cascade');
             $table->foreignId("user_id")->onDelete('cascade');
-            $table->string('ar_name');
             $table->string('name');
             $table->string('phone');
             $table->string('image')->nullable();

@@ -29,14 +29,9 @@ class PatientResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('clinic_id')
                 ->default(fn () => Auth::user()?->clinic_id) // Automatically set clinic_id from auth user
-                ->disabled()
                 ->required()
-                ->hidden()
                 ->numeric(),
-                Forms\Components\TextInput::make('first_name')
-                    ->required()
-                    ->maxLength(255),
-                Forms\Components\TextInput::make('last_name')
+                Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('email')
@@ -68,9 +63,7 @@ class PatientResource extends Resource
                 Tables\Columns\TextColumn::make('clinic_id')
                     ->numeric()
                     ->sortable(),
-                Tables\Columns\TextColumn::make('first_name')
-                    ->searchable(),
-                Tables\Columns\TextColumn::make('last_name')
+                Tables\Columns\TextColumn::make('name')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),

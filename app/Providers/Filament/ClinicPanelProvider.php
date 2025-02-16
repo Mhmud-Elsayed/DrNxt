@@ -12,6 +12,8 @@ use Filament\Pages\Auth\EditProfile;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
+use Filament\FontProviders\SpatieGoogleFontProvider;
+
 use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
@@ -30,6 +32,7 @@ class ClinicPanelProvider extends PanelProvider
             ->login()
             ->unsavedChangesAlerts()
             ->profile(EditProfile::class)
+            ->font('Jacquard 12', provider: SpatieGoogleFontProvider::class)
             ->passwordReset()
             ->tenant(Branch::class)
             ->discoverResources(in: app_path('Filament/Clinic/Resources'), for: 'App\\Filament\\Clinic\\Resources')

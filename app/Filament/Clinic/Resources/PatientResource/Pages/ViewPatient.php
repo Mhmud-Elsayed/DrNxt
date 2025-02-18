@@ -10,6 +10,11 @@ class ViewPatient extends ViewRecord
 {
     protected static string $resource = PatientResource::class;
 
+    public function getTitle(): string
+    {
+        return __('resources.patients.view_title');
+    }
+
     protected function getHeaderActions(): array
     {
         return [

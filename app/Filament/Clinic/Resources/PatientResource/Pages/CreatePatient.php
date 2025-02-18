@@ -9,4 +9,8 @@ use Filament\Resources\Pages\CreateRecord;
 class CreatePatient extends CreateRecord
 {
     protected static string $resource = PatientResource::class;
+    public function getTitle(): string
+    {
+        return __('resources.patients.create_title');
+    }
 }

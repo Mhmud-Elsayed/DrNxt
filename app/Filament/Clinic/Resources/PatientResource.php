@@ -21,33 +21,44 @@ class PatientResource extends Resource
 {
     protected static ?string $model = Patient::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-users';
+    protected static ?string $navigationLabel = 'patients.navigation_label';
 
+    public static function getNavigationLabel(): string
+    {
+        return __('resources.patients.navigation_label');
+    }
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
                 Forms\Components\TextInput::make('clinic_id')
-                ->default(fn () => Auth::user()?->clinic_id) // Automatically set clinic_id from auth user
-                ->required()
-                ->numeric(),
+                    ->default(fn () => Auth::user()?->clinic_id)
+                    ->required()
+                    ->disabled()
+                    ->numeric(),
                 Forms\Components\TextInput::make('name')
+                    ->label(__('resources.patients.name')) // Translated
                     ->required()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('email')
+                    ->label(__('resources.patients.email'))
                     ->email()
                     ->maxLength(255),
                 Forms\Components\TextInput::make('phone')
+                    ->label(__('resources.patients.phone'))
                     ->tel()
                     ->maxLength(255),
-                Forms\Components\DatePicker::make('dob'),
+                Forms\Components\DatePicker::make('dob')
+                    ->label(__('resources.patients.dob')),
                 Forms\Components\Textarea::make('address')
+                    ->label(__('resources.patients.address'))
                     ->columnSpanFull(),
-                    Repeater::make('patientAllergies')
+                Repeater::make('patientAllergies')
                     ->relationship('patientAllergies')
                     ->schema([
                         Select::make('allergy_id')
-                            ->label('Allergy')
+                            ->label(__('resources.patients.allergy'))
                             ->options(Allergy::pluck('name', 'id'))
                             ->searchable(),
                     ])
@@ -56,20 +67,22 @@ class PatientResource extends Resource
             ]);
     }
 
+
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('clinic_id')
-                    ->numeric()
-                    ->sortable(),
                 Tables\Columns\TextColumn::make('name')
+                    ->label(__('resources.patients.name')) // Translated
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
+                    ->label(__('resources.patients.email'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('phone')
+                    ->label(__('resources.patients.phone'))
                     ->searchable(),
                 Tables\Columns\TextColumn::make('dob')
+                    ->label(__('resources.patients.dob'))
                     ->date()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
@@ -80,18 +93,6 @@ class PatientResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-            ])
-            ->filters([
-                //
-            ])
-            ->actions([
-                Tables\Actions\ViewAction::make(),
-                Tables\Actions\EditAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
             ]);
     }
 

@@ -14,6 +14,8 @@ use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use App\Models\Allergy;
 use Illuminate\Support\Facades\Auth;
+use Filament\Tables\Filters\TrashedFilter;
+
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -93,6 +95,19 @@ class PatientResource extends Resource
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
+            ])
+            ->filters([
+                TrashedFilter::make(),
+            ])
+            ->actions([
+                Tables\Actions\RestoreAction::make(),
+                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\ForceDeleteAction::make(),
+            ])
+            ->bulkActions([
+                Tables\Actions\RestoreBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\ForceDeleteBulkAction::make(),
             ]);
     }
 

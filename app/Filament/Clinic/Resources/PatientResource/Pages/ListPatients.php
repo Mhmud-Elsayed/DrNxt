@@ -12,7 +12,7 @@ class ListPatients extends ListRecords
 
     public function getTitle(): string
     {
-        return __('resources.patients.create_title');
+        return __('resources.patients.title');
     }
 
     protected function getHeaderActions(): array

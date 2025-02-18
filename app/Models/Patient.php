@@ -7,11 +7,13 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Patient extends Model
 {
     use HasFactory;
-
+    use SoftDeletes;
     protected $fillable = [
         'clinic_id',
         'name',
@@ -20,7 +22,7 @@ class Patient extends Model
         'dob',
         'address',
     ];
-
+    protected $dates = ['deleted_at']; 
     public function clinic()
     {
         return $this->belongsTo(Clinic::class);
